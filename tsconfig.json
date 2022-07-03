@@ -17,7 +17,7 @@
     "emitDecoratorMetadata": true,         
     "skipLibCheck": true,                     
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "."
+    "baseUrl": "./src"
   },
   "include": [
     "src/**/*"
