@@ -1,4 +1,6 @@
-# rentalx
+<div align="center">
+  <h1>Rentalx</h1>
+</div>
 
 Uma API de um serviço de aluguel de carros
 
