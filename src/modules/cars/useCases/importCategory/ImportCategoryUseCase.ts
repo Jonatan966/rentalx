@@ -44,7 +44,7 @@ class ImportCategoryUseCase {
     const categories = await this.loadCategories(file);
     const createdCategories: Category[] = [];
 
-    categories.forEach(async (category) => {
+    for (const category of categories) {
       const { name, description } = category;
 
       const categoryAlreadyExists = await this.categoriesRepository.findByName(
@@ -59,7 +59,7 @@ class ImportCategoryUseCase {
 
         createdCategories.push(createdCategory);
       }
-    });
+    }
 
     return createdCategories;
   }

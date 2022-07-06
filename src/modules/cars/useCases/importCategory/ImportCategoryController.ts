@@ -11,7 +11,7 @@ class ImportCategoryController {
       request.file
     );
 
-    return response.json({ categories: importedCategories });
+    return response.status(201).json({ categories: importedCategories });
   }
 }
 
