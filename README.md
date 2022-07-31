@@ -5,6 +5,7 @@
 Uma API de um serviço de aluguel de carros
 
 ## 👽 Tecnologias
+
 - NodeJS
 - Express
 - Nodemon
@@ -13,14 +14,17 @@ Uma API de um serviço de aluguel de carros
 - Multer
 - Typescript
 - Swagger
+- Jest
 
 ## 📋 Requisitos
+
 - [x] Deve ser possível listar as categorias
 - [x] Deve ser possível cadastrar uma categoria
 - [x] Deve ser possível importar uma categoria, por meio de um arquivo CSV
 - [x] Deve ser possível cadastrar uma especificação
 
 ## ⚙ Regras de negócio
+
 - [x] Não deve ser possível cadastrar uma categoria já existente
 - [x] Não deve ser possível cadastrar uma especificação já existente
 
@@ -61,4 +65,5 @@ yarn start
 ```
 
 ## 📃 Documentação
+
 Este projeto utiliza o `Swagger`, e é possível acessar por meio da rota `/api-docs`
