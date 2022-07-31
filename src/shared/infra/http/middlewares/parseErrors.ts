@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 
-import { AppError } from '../errors/AppError';
+import { AppError } from '../../../errors/AppError';
 
 export function parseErrors(
   error: Error,
