@@ -21,13 +21,12 @@ Uma API de um serviço de aluguel de carros
 ### Cadastro de Carros
 
 - **Requisitos Funcionais**
-- [ ] Deve ser possível cadastrar um novo carro
+- [x] Deve ser possível cadastrar um novo carro
 
 - **Regras de Negócio**
-- [ ] Não deve ser possível cadastrar um carro com uma placa já existente
-- [ ] Não deve ser possível alterar a placa de um carro já cadastrado
-- [ ] O carro deve ser cadastrado com disponibilidade por padrão
-- [ ] O usuário responsável pelo cadastro deve ser um usuário administrador
+- [x] Não deve ser possível cadastrar um carro com uma placa já existente
+- [x] O carro deve ser cadastrado com disponibilidade por padrão
+- [x] O usuário responsável pelo cadastro deve ser um usuário administrador
 
 ### Listagem de Carros
 
