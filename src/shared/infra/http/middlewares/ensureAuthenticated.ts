@@ -37,6 +37,7 @@ export async function ensureAuthenticated(
 
     request.user = {
       id: user_id,
+      isAdmin: user.isAdmin,
     };
 
     next();
