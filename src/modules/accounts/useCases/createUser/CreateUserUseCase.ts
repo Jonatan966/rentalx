@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
+import { User } from '../../infra/typeorm/entities/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 @injectable()
@@ -17,7 +18,7 @@ class CreateUserUseCase {
     email,
     password,
     driver_license,
-  }: ICreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<User> {
     const passwordHash = await hash(password, 8);
 
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
@@ -26,12 +27,14 @@ class CreateUserUseCase {
       throw new AppError('User already exists');
     }
 
-    await this.usersRepository.create({
+    const createdUser = await this.usersRepository.create({
       name,
       email,
       password: passwordHash,
       driver_license,
     });
+
+    return createdUser;
   }
 }
 
