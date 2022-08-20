@@ -15,9 +15,15 @@ class UploadCarImagesUseCase {
   ) {}
 
   async execute({ car_id, images_name }: IRequest) {
-    images_name.map(async (image) => {
-      await this.carImagesRepository.create(car_id, image);
-    });
+    const createdCarImages = await Promise.all(
+      images_name.map(async (image) => {
+        const carImage = await this.carImagesRepository.create(car_id, image);
+
+        return carImage;
+      })
+    );
+
+    return createdCarImages;
   }
 }
 
