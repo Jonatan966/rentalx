@@ -21,7 +21,7 @@ export class CreateCars1659899768040 implements MigrationInterface {
           },
           {
             name: 'daily_rate',
-            type: 'numeric',
+            type: 'real',
           },
           {
             name: 'available',
@@ -34,7 +34,7 @@ export class CreateCars1659899768040 implements MigrationInterface {
           },
           {
             name: 'fine_amount',
-            type: 'numeric',
+            type: 'real',
           },
           {
             name: 'brand',
