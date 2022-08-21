@@ -1,6 +1,8 @@
 node_modules
 dist
-tmp
+
+tmp/*
+!tmp/.gitkeep
 
 .env.local
 .env
