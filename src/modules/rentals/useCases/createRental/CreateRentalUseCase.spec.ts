@@ -41,7 +41,7 @@ describe('Create Rental', () => {
       });
       await createRentalUseCase.execute({
         user_id: '12345',
-        car_id: '121212',
+        car_id: '212121',
         expected_return_date: dayAdd24Hours,
       });
     }).rejects.toBeInstanceOf(AppError);
