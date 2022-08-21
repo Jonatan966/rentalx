@@ -9,7 +9,7 @@ jest.mock('../../../../utils/file', () => ({
   deleteFile: jest.fn(),
 }));
 
-describe('Upload user avatar', () => {
+describe('Update user avatar', () => {
   beforeEach(() => {
     usersRepositoryInMemory = new UsersRepositoryInMemory();
     updateUserAvatarUseCase = new UpdateUserAvatarUseCase(
@@ -17,7 +17,7 @@ describe('Upload user avatar', () => {
     );
   });
 
-  it('should be able to upload a user avatar', async () => {
+  it('should be able to update a user avatar', async () => {
     const createdUser = await usersRepositoryInMemory.create({
       name: 'fake user 1',
       email: 'user@email.com',
