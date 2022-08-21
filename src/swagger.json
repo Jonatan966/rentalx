@@ -136,6 +136,46 @@
             "description": "Specification already exists"
           }
         }
+      },
+      "get": {
+        "tags": ["Specification"],
+        "summary": "List all specifications",
+        "description": "List all specifications",
+        "responses": {
+          "200": {
+            "description": "A list of all specifications",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "id": "00a0eca1-f4d5-408d-8268-418edab8dd5f",
+                      "name": "4 portas",
+                      "description": "Carro incrível",
+                      "created_at": "2022-08-21T22:29:00.124Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/cars": {
