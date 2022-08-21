@@ -15,6 +15,7 @@ Uma API de um serviço de aluguel de carros
 - Typescript
 - Swagger
 - Jest
+- Supertest
 
 ## Funcionalidades
 
@@ -44,7 +45,7 @@ Uma API de um serviço de aluguel de carros
 
 - **Requisitos Funcionais**
 - [x] Deve ser possível cadastrar uma especificação para um carro
-- [ ] Deve ser possível listar todas as especificações
+- [x] Deve ser possível listar todas as especificações
 
 - **Regras de Negócio**
 - [x] Não deve ser possível cadastrar uma especificação para um carro não cadastrado

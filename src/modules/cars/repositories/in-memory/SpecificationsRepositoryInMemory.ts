@@ -34,6 +34,10 @@ class SpecificationsRepositoryInMemory implements ISpecificationsRepository {
       ids.includes(specification.id)
     );
   }
+
+  async list(): Promise<Specification[]> {
+    return this.specifications;
+  }
 }
 
 export { SpecificationsRepositoryInMemory };

@@ -111,7 +111,7 @@
     },
     "/specifications": {
       "post": {
-        "tags": ["Specifications"],
+        "tags": ["Specification"],
         "summary": "Create a specification",
         "description": "Create a new specification",
         "security": [{ "bearerAuth": [] }],
@@ -140,7 +140,7 @@
     },
     "/cars": {
       "post": {
-        "tags": ["Cars"],
+        "tags": ["Car"],
         "description": "Create a new car",
         "summary": "Create a new car",
         "security": [{ "bearerAuth": [] }],
@@ -225,7 +225,7 @@
     },
     "/cars/available": {
       "get": {
-        "tags": ["Cars"],
+        "tags": ["Car"],
         "description": "List available cars",
         "summary": "List available cars",
         "responses": {
@@ -291,7 +291,7 @@
     },
     "/cars/{id}/specifications": {
       "post": {
-        "tags": ["Cars"],
+        "tags": ["Car"],
         "description": "Add specification to car",
         "summary": "Add specification to car",
         "security": [{ "bearerAuth": [] }],
@@ -412,7 +412,7 @@
     },
     "/cars/{id}/images": {
       "post": {
-        "tags": ["Cars"],
+        "tags": ["Car"],
         "summary": "Upload images",
         "description": "Upload images",
         "security": [{ "bearerAuth": [] }],
@@ -457,7 +457,7 @@
     },
     "/users": {
       "post": {
-        "tags": ["Users"],
+        "tags": ["User"],
         "description": "Create a new user",
         "summary": "Create a new user",
         "requestBody": {
@@ -532,7 +532,7 @@
     },
     "/users/avatar": {
       "patch": {
-        "tags": ["Users"],
+        "tags": ["User"],
         "description": "Upload a new user avatar",
         "summary": "Upload a new user avatar",
         "security": [{ "bearerAuth": [] }],
@@ -555,7 +555,7 @@
     },
     "/rentals": {
       "post": {
-        "tags": ["Rentals"],
+        "tags": ["Rental"],
         "description": "Create a new rental",
         "summary": "Create a new rental",
         "requestBody": {
