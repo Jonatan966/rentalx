@@ -14,19 +14,12 @@
         "tags": ["Category"],
         "summary": "Create a category",
         "description": "Create a new category",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/definitions/Category"
               },
               "example": {
                 "name": "Category name sample",
@@ -88,8 +81,9 @@
     "/categories/import": {
       "post": {
         "tags": ["Category"],
-        "summary": "Upload a new category",
-        "description": "Upload a new category",
+        "summary": "Upload a new categories from CSV file",
+        "description": "Upload a new categories from CSV file",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -120,6 +114,7 @@
         "tags": ["Specifications"],
         "summary": "Create a specification",
         "description": "Create a new specification",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -142,10 +137,562 @@
           }
         }
       }
+    },
+    "/cars": {
+      "post": {
+        "tags": ["Cars"],
+        "description": "Create a new car",
+        "summary": "Create a new car",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              },
+              "example": {
+                "name": "Fake Car",
+                "description": "Fake description",
+                "daily_rate": 100,
+                "license_plate": "ABC-1234",
+                "fine_amount": 60,
+                "brand": "brand",
+                "category_id": "e85f1ebe-18b7-42c7-a1db-2ac39d8c7ab3"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "available": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "daily_rate": {
+                      "type": "number"
+                    },
+                    "license_plate": {
+                      "type": "string"
+                    },
+                    "fine_amount": {
+                      "type": "number"
+                    },
+                    "brand": {
+                      "type": "string"
+                    },
+                    "category_id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": "5cf47992-6daf-42fe-9301-b97ae046436e",
+                    "available": true,
+                    "name": "Audi A1",
+                    "description": "Carro com espaço",
+                    "daily_rate": 140,
+                    "license_plate": "ABC-12345",
+                    "fine_amount": 110,
+                    "brand": "Audi",
+                    "category_id": "1162629d-b7fd-417a-bdf7-e3f69a6a9ae4",
+                    "created_at": "2022-08-07T20:35:06.136Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Car already exists / Category does not exists"
+          }
+        }
+      }
+    },
+    "/cars/available": {
+      "get": {
+        "tags": ["Cars"],
+        "description": "List available cars",
+        "summary": "List available cars",
+        "responses": {
+          "200": {
+            "description": "List of available cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "available": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "daily_rate": {
+                        "type": "number"
+                      },
+                      "license_plate": {
+                        "type": "string"
+                      },
+                      "fine_amount": {
+                        "type": "number"
+                      },
+                      "brand": {
+                        "type": "string"
+                      },
+                      "category_id": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "id": "5cf47992-6daf-42fe-9301-b97ae046436e",
+                      "available": true,
+                      "name": "Audi A1",
+                      "description": "Carro com espaço",
+                      "daily_rate": 140,
+                      "license_plate": "ABC-12345",
+                      "fine_amount": 110,
+                      "brand": "Audi",
+                      "category_id": "1162629d-b7fd-417a-bdf7-e3f69a6a9ae4",
+                      "created_at": "2022-08-07T20:35:06.136Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/{id}/specifications": {
+      "post": {
+        "tags": ["Cars"],
+        "description": "Add specification to car",
+        "summary": "Add specification to car",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "specifications_id": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A new car specification",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "available": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "daily_rate": {
+                    "type": "number"
+                  },
+                  "license_plate": {
+                    "type": "string"
+                  },
+                  "fine_amount": {
+                    "type": "number"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "category_id": {
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "type": "string"
+                  },
+                  "specifications": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "id": "65616683-735f-4003-8aa6-f200f87929df",
+                  "available": true,
+                  "name": "Audi A3",
+                  "description": "Carro bonito",
+                  "daily_rate": 140,
+                  "license_plate": "ABC-1234",
+                  "fine_amount": 100,
+                  "brand": "Audi",
+                  "category_id": "1162629d-b7fd-417a-bdf7-e3f69a6a9ae4",
+                  "created_at": "2022-08-07T20:08:35.891Z",
+                  "specifications": [
+                    {
+                      "id": "40675087-4dfe-4710-9ccd-2e4ba797adc2",
+                      "name": "Conversível",
+                      "description": "Carro incrível",
+                      "created_at": "2022-07-06T01:55:56.835Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Car does not exists"
+          }
+        }
+      }
+    },
+    "/cars/{id}/images": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Upload images",
+        "description": "Upload images",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Car does not exists"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "description": "Create a new user",
+        "summary": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "driver_license": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "name": "José das Coisas",
+                "email": "coisas.coisas@coisas.com",
+                "driver_license": "123456"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "isAdmin": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "driver_license": {
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": "9791ecce-0d7b-4bb3-ac3a-fdee453b6476",
+                  "isAdmin": false,
+                  "name": "José das Coisas",
+                  "email": "coisas.coisas@coisas.com",
+                  "driver_license": "123456",
+                  "created_at": "2022-08-21T21:12:07.355Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/users/avatar": {
+      "patch": {
+        "tags": ["Users"],
+        "description": "Upload a new user avatar",
+        "summary": "Upload a new user avatar",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Uploaded user avatar"
+          }
+        }
+      }
+    },
+    "/rentals": {
+      "post": {
+        "tags": ["Rentals"],
+        "description": "Create a new rental",
+        "summary": "Create a new rental",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expected_return_date": {
+                    "type": "string"
+                  },
+                  "car_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A new rental",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "67f4bd81-9612-4b05-9b46-3627d2d8ebbd",
+                  "car_id": "65616683-735f-4003-8aa6-f200f87929df",
+                  "user_id": "89830743-5527-4685-ad16-98c2179f110c",
+                  "expected_return_date": "2022-08-17T19:33:23.475Z",
+                  "start_date": "2022-08-15T19:33:49.139Z",
+                  "created_at": "2022-08-15T19:33:49.139Z",
+                  "updated_at": "2022-08-15T19:33:49.139Z"
+                },
+                "schema": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "car_id": {
+                    "type": "string"
+                  },
+                  "user_id": {
+                    "type": "string"
+                  },
+                  "expected_return_date": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "There's a rental in progress for user / Invalid return time / Car is unavailable"
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["Session"],
+        "summary": "Authentication user",
+        "description": "Authentication user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or password incorrect!"
+          }
+        }
+      }
     }
   },
   "definitions": {
     "Specification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Car": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "daily_rate": {
+          "type": "number"
+        },
+        "license_plate": {
+          "type": "string"
+        },
+        "fine_amount": {
+          "type": "number"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "category_id": {
+          "type": "string"
+        }
+      }
+    },
+    "Category": {
       "type": "object",
       "properties": {
         "name": {
