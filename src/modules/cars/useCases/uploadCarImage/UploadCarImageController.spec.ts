@@ -35,10 +35,15 @@ describe('Upload Car Image Controller', () => {
 
     const { token } = responseToken.body;
 
-    const responseCarCategory = await request(app).post('/categories').send({
-      name: 'New category',
-      description: 'The new category',
-    });
+    const responseCarCategory = await request(app)
+      .post('/categories')
+      .send({
+        name: 'New category',
+        description: 'The new category',
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      });
 
     const responseCar = await request(app)
       .post('/cars')

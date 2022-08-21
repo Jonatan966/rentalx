@@ -48,10 +48,15 @@ describe('Create Rental Controller', () => {
 
     const { token } = responseToken.body;
 
-    const responseCarCategory = await request(app).post('/categories').send({
-      name: 'New category',
-      description: 'Description of the new category',
-    });
+    const responseCarCategory = await request(app)
+      .post('/categories')
+      .send({
+        name: 'New category',
+        description: 'Description of the new category',
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      });
 
     const responseCar = await request(app)
       .post('/cars')
@@ -90,10 +95,15 @@ describe('Create Rental Controller', () => {
 
     const { token: adminToken } = responseAdminToken.body;
 
-    const responseCarCategory = await request(app).post('/categories').send({
-      name: 'New category',
-      description: 'Description of the new category',
-    });
+    const responseCarCategory = await request(app)
+      .post('/categories')
+      .send({
+        name: 'New category',
+        description: 'Description of the new category',
+      })
+      .set({
+        Authorization: `Bearer ${adminToken}`,
+      });
 
     const responseCar = await request(app)
       .post('/cars')
@@ -137,10 +147,15 @@ describe('Create Rental Controller', () => {
 
     const { token } = responseToken.body;
 
-    const responseCarCategory = await request(app).post('/categories').send({
-      name: 'New category',
-      description: 'Description of the new category',
-    });
+    const responseCarCategory = await request(app)
+      .post('/categories')
+      .send({
+        name: 'New category',
+        description: 'Description of the new category',
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      });
 
     const responseCar = await request(app)
       .post('/cars')
@@ -184,10 +199,15 @@ describe('Create Rental Controller', () => {
     const { token: adminToken } = responseAdminToken.body;
     const { token: notAdminToken } = responseNotAdminToken.body;
 
-    const responseCarCategory = await request(app).post('/categories').send({
-      name: 'New category',
-      description: 'Description of the new category',
-    });
+    const responseCarCategory = await request(app)
+      .post('/categories')
+      .send({
+        name: 'New category',
+        description: 'Description of the new category',
+      })
+      .set({
+        Authorization: `Bearer ${adminToken}`,
+      });
 
     const responseCar = await request(app)
       .post('/cars')

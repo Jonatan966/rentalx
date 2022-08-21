@@ -1,17 +1,28 @@
 import { AppError } from '../../../../shared/errors/AppError';
 import { CarsRepositoryInMemory } from '../../repositories/in-memory/CarsRepositoryInMemory';
+import { CategoriesRepositoryInMemory } from '../../repositories/in-memory/CategoriesRepositoryInMemory';
 import { CreateCarUseCase } from './CreateCarUseCase';
 
 let createCarUseCase: CreateCarUseCase;
 let carsRepositoryInMemory: CarsRepositoryInMemory;
+let categoriesRepositoryInMemory: CategoriesRepositoryInMemory;
 
 describe('Create Car', () => {
   beforeEach(() => {
     carsRepositoryInMemory = new CarsRepositoryInMemory();
-    createCarUseCase = new CreateCarUseCase(carsRepositoryInMemory);
+    categoriesRepositoryInMemory = new CategoriesRepositoryInMemory();
+    createCarUseCase = new CreateCarUseCase(
+      carsRepositoryInMemory,
+      categoriesRepositoryInMemory
+    );
   });
 
   it('should be able to create a new car', async () => {
+    const category = await categoriesRepositoryInMemory.create({
+      name: 'New category',
+      description: 'description',
+    });
+
     const car = await createCarUseCase.execute({
       name: 'Fake Car',
       description: 'Fake description',
@@ -19,14 +30,33 @@ describe('Create Car', () => {
       license_plate: 'ABC-1234',
       fine_amount: 60,
       brand: 'brand',
-      category_id: 'category',
+      category_id: category.id,
     });
 
     expect(car).toHaveProperty('id');
   });
 
+  it('should not be able to create a new car with a non-existing category', async () => {
+    await expect(
+      createCarUseCase.execute({
+        name: 'Fake Car',
+        description: 'Fake description',
+        daily_rate: 100,
+        license_plate: 'BOM-1234',
+        fine_amount: 60,
+        brand: 'brand',
+        category_id: 'non-existing-category',
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
   it('should not be able to create a car with exists license plate', () => {
     expect(async () => {
+      const category = await categoriesRepositoryInMemory.create({
+        name: 'New category',
+        description: 'description',
+      });
+
       await createCarUseCase.execute({
         name: 'Fake Car 1',
         description: 'Fake description',
@@ -34,7 +64,7 @@ describe('Create Car', () => {
         license_plate: 'ABC-1234',
         fine_amount: 60,
         brand: 'brand',
-        category_id: 'category',
+        category_id: category.id,
       });
 
       await createCarUseCase.execute({
@@ -44,12 +74,17 @@ describe('Create Car', () => {
         license_plate: 'ABC-1234',
         fine_amount: 60,
         brand: 'brand',
-        category_id: 'category',
+        category_id: category.id,
       });
     }).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to create a car with available true by default', async () => {
+    const category = await categoriesRepositoryInMemory.create({
+      name: 'New category',
+      description: 'description',
+    });
+
     const car = await createCarUseCase.execute({
       name: 'Car Available',
       description: 'Fake description',
@@ -57,7 +92,7 @@ describe('Create Car', () => {
       license_plate: 'ABCD-1234',
       fine_amount: 60,
       brand: 'brand',
-      category_id: 'category',
+      category_id: category.id,
     });
 
     expect(car).toHaveProperty('available', true);

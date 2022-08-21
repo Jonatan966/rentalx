@@ -11,6 +11,8 @@ interface ICategoriesRepository {
   list(): Promise<Category[]>;
 
   findByName(name: string): Promise<Category | undefined>;
+
+  findById(id: string): Promise<Category | undefined>;
 }
 
 export { ICategoriesRepository, ICreateCategoryDTO };

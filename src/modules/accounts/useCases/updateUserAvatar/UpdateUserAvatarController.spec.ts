@@ -22,6 +22,11 @@ describe('Update User Avatar Controller', () => {
     );
   });
 
+  afterAll(async () => {
+    await connection.dropDatabase();
+    await connection.close();
+  });
+
   it('should be able to update a user avatar', async () => {
     const responseToken = await request(app).post('/sessions').send({
       email: 'admin@rentx.com.br',

@@ -18,8 +18,8 @@ describe('Create Car Specification Controller', () => {
 
     await connection.query(
       `INSERT INTO users(id, name, email, password, "isAdmin", driver_license, created_at)
-      VALUES('${id}', 'Admin', 'admin@rentx.com.br', '${password}', true, 'XXXXXXX', now())
-      `
+        VALUES('${id}', 'Admin', 'admin@rentx.com.br', '${password}', true, 'XXXXXXX', now())
+        `
     );
   });
 

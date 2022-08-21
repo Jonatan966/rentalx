@@ -4,12 +4,15 @@ import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateCarDTO } from '../../dtos/ICreateCarDTO';
 import { Car } from '../../infra/typeorm/entities/Car';
 import { ICarsRepository } from '../../repositories/ICarsRepository';
+import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
 
 @injectable()
 class CreateCarUseCase {
   constructor(
     @inject('CarsRepository')
-    private carsRepository: ICarsRepository
+    private carsRepository: ICarsRepository,
+    @inject('CategoriesRepository')
+    private categoriesRepository: ICategoriesRepository
   ) {}
 
   async execute({
@@ -27,6 +30,14 @@ class CreateCarUseCase {
 
     if (carAlreadyExists) {
       throw new AppError('Car already exists');
+    }
+
+    const categoryExists = await this.categoriesRepository.findById(
+      category_id
+    );
+
+    if (!categoryExists) {
+      throw new AppError('Category does not exists');
     }
 
     const createdCar = await this.carsRepository.create({
