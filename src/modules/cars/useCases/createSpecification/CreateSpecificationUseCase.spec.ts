@@ -23,17 +23,17 @@ describe('Create specification', () => {
     expect(specification).toHaveProperty('name', 'Specification');
   });
 
-  it('should not be able to create specification with same name', () => {
-    expect(async () => {
-      await createSpecificationUseCase.execute({
-        name: 'Specification',
-        description: 'A new specification 1',
-      });
+  it('should not be able to create specification with same name', async () => {
+    await createSpecificationUseCase.execute({
+      name: 'Specification',
+      description: 'A new specification 1',
+    });
 
-      await createSpecificationUseCase.execute({
+    await expect(
+      createSpecificationUseCase.execute({
         name: 'Specification',
         description: 'A new specification 2',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError('Specification already exists'));
   });
 });

@@ -4,7 +4,7 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev --inspect -r dotenv/config --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/app.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
-    "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
+    "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
   "devDependencies": {

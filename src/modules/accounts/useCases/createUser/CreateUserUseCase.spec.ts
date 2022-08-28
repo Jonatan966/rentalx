@@ -23,20 +23,20 @@ describe('Create User', () => {
   });
 
   it('should not be able to create a user with same e-mail', async () => {
-    expect(async () => {
-      await createUserUseCase.execute({
-        name: 'fake user 1',
-        email: 'user@email.com',
-        password: 'the-password',
-        driver_license: '1234-ABCD',
-      });
+    await createUserUseCase.execute({
+      name: 'fake user 1',
+      email: 'user@email.com',
+      password: 'the-password',
+      driver_license: '1234-ABCD',
+    });
 
-      await createUserUseCase.execute({
+    await expect(
+      createUserUseCase.execute({
         name: 'fake user 2',
         email: 'user@email.com',
         password: 'the-password-2',
         driver_license: 'ABCD-1234',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError('User already exists'));
   });
 });
