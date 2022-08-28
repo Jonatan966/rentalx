@@ -84,6 +84,20 @@ Uma API de um serviço de aluguel de carros
 - **Regras de Negócio**
 - [x] Não deve ser possível cadastrar uma categoria já existente
 
+### Devolução de carro
+
+- **Requisitos Funcionais**
+- [x] Deve ser possível realizar a devolução de um carro
+
+- **Regras de Negócio**
+- [x] Se o carro for devolvido com menos de 24 horas, deverá ser cobrado diária completa
+- [x] Ao realizar a devolução, o carro deverá ser liberado para outro aluguel
+- [x] Ao realizar a devolução, o usuário deverá ser liberado para outro aluguel
+- [x] Ao realizar a devolução, deverá ser calculado o total do aluguel
+- [x] Caso o horário de devoução seja superior ao horário previsto de entrega, deverá ser cobrado multa proporcional aos dias de atraso
+- [x] Caso haja multa, deverá ser somado ao total do aluguel
+- [x] O usuário deve estar logado
+
 ## 🧰 Como iniciar
 
 ### ‼️ Requerimentos
