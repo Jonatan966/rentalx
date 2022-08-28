@@ -73,6 +73,7 @@ Uma API de um serviço de aluguel de carros
 - [x] O aluguel deve ter duração mínima de 24 horas
 - [x] Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuário
 - [x] Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo carro
+- [x] Ao alugar um carro, seu status deve ser alterado para indisponível
 
 ### Categorias
 
