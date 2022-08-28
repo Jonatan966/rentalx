@@ -19,7 +19,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/Category"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
               },
               "example": {
                 "name": "Category name sample",
@@ -30,7 +38,12 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "$ref": "#/definitions/Category"
+              }
+            }
           },
           "500": {
             "description": "Category already exists"
@@ -49,27 +62,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "created_at": {
-                        "type": "string"
-                      }
-                    },
-                    "example": {
-                      "id": "d4c74250-ef94-4521-9c0b-d9e723147254",
-                      "name": "Sedan",
-                      "description": "Carro Sedan",
-                      "created_at": "2022-07-03T20:09:17.113Z"
-                    }
+                    "$ref": "#/definitions/Category"
                   }
                 }
               }
@@ -104,7 +97,17 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Category"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -119,7 +122,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/Specification"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
               },
               "example": {
                 "name": "Specification name sample",
@@ -130,7 +141,14 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Specification"
+                }
+              }
+            }
           },
           "500": {
             "description": "Specification already exists"
@@ -149,27 +167,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "created_at": {
-                        "type": "string"
-                      }
-                    },
-                    "example": {
-                      "id": "00a0eca1-f4d5-408d-8268-418edab8dd5f",
-                      "name": "4 portas",
-                      "description": "Carro incrível",
-                      "created_at": "2022-08-21T22:29:00.124Z"
-                    }
+                    "$ref": "#/definitions/Specification"
                   }
                 }
               }
@@ -188,7 +186,30 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/Car"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "daily_rate": {
+                    "type": "number"
+                  },
+                  "license_plate": {
+                    "type": "string"
+                  },
+                  "fine_amount": {
+                    "type": "number"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "category_id": {
+                    "type": "string"
+                  }
+                }
               },
               "example": {
                 "name": "Fake Car",
@@ -208,51 +229,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "available": {
-                      "type": "boolean"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "daily_rate": {
-                      "type": "number"
-                    },
-                    "license_plate": {
-                      "type": "string"
-                    },
-                    "fine_amount": {
-                      "type": "number"
-                    },
-                    "brand": {
-                      "type": "string"
-                    },
-                    "category_id": {
-                      "type": "string"
-                    },
-                    "created_at": {
-                      "type": "string"
-                    }
-                  },
-                  "example": {
-                    "id": "5cf47992-6daf-42fe-9301-b97ae046436e",
-                    "available": true,
-                    "name": "Audi A1",
-                    "description": "Carro com espaço",
-                    "daily_rate": 140,
-                    "license_plate": "ABC-12345",
-                    "fine_amount": 110,
-                    "brand": "Audi",
-                    "category_id": "1162629d-b7fd-417a-bdf7-e3f69a6a9ae4",
-                    "created_at": "2022-08-07T20:35:06.136Z"
-                  }
+                  "$ref": "#/definitions/Car"
                 }
               }
             }
@@ -276,51 +253,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "available": {
-                        "type": "boolean"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "daily_rate": {
-                        "type": "number"
-                      },
-                      "license_plate": {
-                        "type": "string"
-                      },
-                      "fine_amount": {
-                        "type": "number"
-                      },
-                      "brand": {
-                        "type": "string"
-                      },
-                      "category_id": {
-                        "type": "string"
-                      },
-                      "created_at": {
-                        "type": "string"
-                      }
-                    },
-                    "example": {
-                      "id": "5cf47992-6daf-42fe-9301-b97ae046436e",
-                      "available": true,
-                      "name": "Audi A1",
-                      "description": "Carro com espaço",
-                      "daily_rate": 140,
-                      "license_plate": "ABC-12345",
-                      "fine_amount": 110,
-                      "brand": "Audi",
-                      "category_id": "1162629d-b7fd-417a-bdf7-e3f69a6a9ae4",
-                      "created_at": "2022-08-07T20:35:06.136Z"
-                    }
+                    "$ref": "#/definitions/Car"
                   }
                 }
               }
@@ -598,6 +531,7 @@
         "tags": ["Rental"],
         "description": "Create a new rental",
         "summary": "Create a new rental",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -620,43 +554,64 @@
             "description": "A new rental",
             "content": {
               "application/json": {
-                "example": {
-                  "id": "67f4bd81-9612-4b05-9b46-3627d2d8ebbd",
-                  "car_id": "65616683-735f-4003-8aa6-f200f87929df",
-                  "user_id": "89830743-5527-4685-ad16-98c2179f110c",
-                  "expected_return_date": "2022-08-17T19:33:23.475Z",
-                  "start_date": "2022-08-15T19:33:49.139Z",
-                  "created_at": "2022-08-15T19:33:49.139Z",
-                  "updated_at": "2022-08-15T19:33:49.139Z"
-                },
-                "schema": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "car_id": {
-                    "type": "string"
-                  },
-                  "user_id": {
-                    "type": "string"
-                  },
-                  "expected_return_date": {
-                    "type": "string"
-                  },
-                  "start_date": {
-                    "type": "string"
-                  },
-                  "created_at": {
-                    "type": "string"
-                  },
-                  "updated_at": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/definitions/Rental"
               }
             }
           },
           "400": {
             "description": "There's a rental in progress for user / Invalid return time / Car is unavailable"
+          }
+        }
+      }
+    },
+    "/rentals/user": {
+      "get": {
+        "tags": ["Rental"],
+        "description": "List rentals by user",
+        "summary": "List rentals by user",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "A rentals list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Rental"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rentals/devolution/{rental_id}": {
+      "post": {
+        "tags": ["Rental"],
+        "description": "Rental devolution",
+        "summary": "Rental devolution",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "rental_id",
+            "in": "path",
+            "description": "Rental ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A rent returned",
+            "content": {
+              "application/json": {
+                "$ref": "#/definitions/Rental"
+              }
+            }
           }
         }
       }
@@ -685,7 +640,14 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Session"
+                }
+              }
+            }
           },
           "400": {
             "description": "Email or password incorrect!"
@@ -698,17 +660,35 @@
     "Specification": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
         "description": {
           "type": "string"
+        },
+        "created_at": {
+          "type": "string"
         }
+      },
+      "example": {
+        "id": "00a0eca1-f4d5-408d-8268-418edab8dd5f",
+        "name": "4 portas",
+        "description": "Carro incrível",
+        "created_at": "2022-08-21T22:29:00.124Z"
       }
     },
     "Car": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
         "name": {
           "type": "string"
         },
@@ -729,18 +709,119 @@
         },
         "category_id": {
           "type": "string"
+        },
+        "created_at": {
+          "type": "string"
         }
+      },
+      "example": {
+        "id": "5cf47992-6daf-42fe-9301-b97ae046436e",
+        "available": true,
+        "name": "Audi A1",
+        "description": "Carro com espaço",
+        "daily_rate": 140,
+        "license_plate": "ABC-12345",
+        "fine_amount": 110,
+        "brand": "Audi",
+        "category_id": "1162629d-b7fd-417a-bdf7-e3f69a6a9ae4",
+        "created_at": "2022-08-07T20:35:06.136Z"
       }
     },
     "Category": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
         "description": {
           "type": "string"
+        },
+        "created_at": {
+          "type": "string"
         }
+      },
+      "example": {
+        "id": "d4c74250-ef94-4521-9c0b-d9e723147254",
+        "name": "Sedan",
+        "description": "Carro Sedan",
+        "created_at": "2022-07-03T20:09:17.113Z"
+      }
+    },
+    "Rental": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "car_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "expected_return_date": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "id": "67f4bd81-9612-4b05-9b46-3627d2d8ebbd",
+        "car_id": "65616683-735f-4003-8aa6-f200f87929df",
+        "user_id": "89830743-5527-4685-ad16-98c2179f110c",
+        "expected_return_date": "2022-08-17T19:33:23.475Z",
+        "available": true,
+        "start_date": "2022-08-15T19:33:49.139Z",
+        "created_at": "2022-08-15T19:33:49.139Z",
+        "updated_at": "2022-08-15T19:33:49.139Z"
+      }
+    },
+    "Session": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "example": {
+        "user": {
+          "email": "admin@rentx.com.br",
+          "name": "Admin"
+        },
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjE2OTgwNDUsImV4cCI6MTY2MTc4NDQ0NSwic3ViIjoiNTQzNTdlZjUtYmRhZC00NDhiLTg1YzUtNmVmYWUzN2ZkYjk3In0.2qmSHEQAaVNEHNZqQXl_OHnJ4YxdFnT8nxKkO5_FaHY"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
