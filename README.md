@@ -98,6 +98,14 @@ Uma API de um serviço de aluguel de carros
 - [x] Caso haja multa, deverá ser somado ao total do aluguel
 - [x] O usuário deve estar logado
 
+# Listagem de Alugueis para usuário
+
+- **Requisitos Funcionais**
+- [x] Deve ser possível realizar a busca de todos os alugueis para o usuário
+
+- **Regras de Negócio**
+- [x] O usuário deve estar logado
+
 ## 🧰 Como iniciar
 
 ### ‼️ Requerimentos
