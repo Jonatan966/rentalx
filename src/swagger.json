@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "RentalX Documentation",
+    "title": "RentX Documentation",
     "description": "This is an API Rent",
     "version": "1.0.0",
     "contact": {
@@ -654,6 +654,137 @@
           }
         }
       }
+    },
+    "/sessions/refresh-token": {
+      "post": {
+        "tags": ["Session"],
+        "summary": "Create a new refresh token",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "description": "A refresh token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "required": false,
+            "description": "A refresh token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjE2OTgwNDUsImV4cCI6MTY2MTc4NDQ0NSwic3ViIjoiNTQzNTdlZjUtYmRhZC00NDhiLTg1YzUtNmVmYWUzN2ZkYjk3In0.2qmSHEQAaVNEHNZqQXl_OHnJ4YxdFnT8nxKkO5_FaHY"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created new refresh token",
+            "content": {
+              "application/json": {
+                "$ref": "#/definitions/UserToken"
+              }
+            }
+          },
+          "400": {
+            "description": "Refresh token does not exists"
+          }
+        }
+      }
+    },
+    "/password/forgot": {
+      "post": {
+        "tags": ["Password"],
+        "summary": "Request password recover",
+        "description": "Request password recover",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "admin@rentx.com.br"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Requested"
+          },
+          "400": {
+            "description": "User does not exists"
+          }
+        }
+      }
+    },
+    "/password/reset": {
+      "post": {
+        "tags": ["Password"],
+        "summary": "Reset password",
+        "description": "Reset password",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "A magic token sended to user email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "password": "new password"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password changed successful!"
+          },
+          "400": {
+            "description": "Invalid token / Token expired"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -813,6 +944,33 @@
           "name": "Admin"
         },
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjE2OTgwNDUsImV4cCI6MTY2MTc4NDQ0NSwic3ViIjoiNTQzNTdlZjUtYmRhZC00NDhiLTg1YzUtNmVmYWUzN2ZkYjk3In0.2qmSHEQAaVNEHNZqQXl_OHnJ4YxdFnT8nxKkO5_FaHY"
+      }
+    },
+    "UserToken": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "expires_date": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "id": "1b2a0473-5606-407d-bc0e-d1617bffd752",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHJlbnR4LmNvbS5iciIsImlhdCI6MTY2MjIxMzA4NCwiZXhwIjoxNjY0ODA1MDg0LCJzdWIiOiI1NDM1N2VmNS1iZGFkLTQ0OGItODVjNS02ZWZhZTM3ZmRiOTcifQ.FHQ292so4_Dikrm4MRjxhlOTC_Q92jxfYPd0wMnMGoI",
+        "user_id": "54357ef5-bdad-448b-85c5-6efae37fdb97",
+        "expires_date": "2022-10-03T13:51:24.606Z",
+        "created_at": "2022-09-03T16:51:24.613Z"
       }
     }
   },
