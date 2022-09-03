@@ -1,0 +1,12 @@
+.topbar-wrapper {
+  height: 60px;
+}
+
+.topbar-wrapper img {
+  content: url('/swagger/rentx-logo.png');
+  object-fit: contain;
+}
+
+.topbar {
+  background-color: #1b1b1f !important;
+}
