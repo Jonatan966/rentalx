@@ -16,6 +16,8 @@ Uma API de um serviço de aluguel de carros
 - Swagger
 - Jest
 - Supertest
+- Nodemailer
+- Handlebars
 
 ## Funcionalidades
 
@@ -105,6 +107,17 @@ Uma API de um serviço de aluguel de carros
 
 - **Regras de Negócio**
 - [x] O usuário deve estar logado
+
+# Recuperar senha
+
+- **Requisitos Funcionais**
+- [x] Deve ser possível o usuário recuperar a senha informando o e-mail
+- [x] O usuário deve receber um e-mail com o passo a passo para a recuperação da senha
+- [x] O usuário deve conseguir inserir uma nova senha
+
+- **Regras de Negócio**
+- [x] O usuário precisa informar uma nova senha
+- [x] O link enviado para a recuperação deve expirar em 3 horas
 
 ## 🧰 Como iniciar
 
