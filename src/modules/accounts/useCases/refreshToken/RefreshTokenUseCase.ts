@@ -1,4 +1,4 @@
-import { JwtPayload, sign, verify } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
 import auth from '../../../../config/auth';
