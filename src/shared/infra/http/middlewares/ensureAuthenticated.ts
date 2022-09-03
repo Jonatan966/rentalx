@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
+import auth from '../../../../config/auth';
 import { UsersRepository } from '../../../../modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { AppError } from '../../../errors/AppError';
 
@@ -22,10 +23,7 @@ export async function ensureAuthenticated(
   const parsedToken = authHeader.replace('Bearer ', '');
 
   try {
-    const { sub: user_id } = verify(
-      parsedToken,
-      '85de28c898163bc78af163219b4424fc'
-    ) as IPayload;
+    const { sub: user_id } = verify(parsedToken, auth.secret_token) as IPayload;
 
     const usersRepository = new UsersRepository();
 
