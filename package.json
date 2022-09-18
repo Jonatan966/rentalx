@@ -2,7 +2,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node dist/server.js",
+    "start": "cross-env NODE_ENV=prod node ./dist/shared/infra/http/app.js",
     "dev": "ts-node-dev --inspect -r dotenv/config --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/app.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
     "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",

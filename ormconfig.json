@@ -1,13 +1,47 @@
-{
-  "type": "postgres",
-  "port": 5432,
-  "host": "localhost",
-  "username": "docker",
-  "password": "ignite",
-  "database": "rentx",
-  "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
-  "entities": ["./src/modules/**/entities/*.ts"],
-  "cli": {
-    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+[
+  {
+    "environment": "dev",
+    "name": "dev",
+    "type": "postgres",
+    "port": 5432,
+    "host": "localhost",
+    "username": "docker",
+    "password": "ignite",
+    "database": "rentx",
+    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+    "entities": ["./src/modules/**/entities/*.ts"],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+    }
+  },
+  {
+    "environment": "test",
+    "name": "test",
+    "type": "postgres",
+    "port": 5432,
+    "host": "localhost",
+    "username": "docker",
+    "password": "ignite",
+    "database": "rentx",
+    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+    "entities": ["./src/modules/**/entities/*.ts"],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+    }
+  },
+  {
+    "environment": "prod",
+    "name": "prod",
+    "type": "postgres",
+    "port": 5432,
+    "host": "localhost",
+    "username": "docker",
+    "password": "ignite",
+    "database": "rentx",
+    "migrations": ["./dist/shared/infra/typeorm/migrations/*.js"],
+    "entities": ["./dist/modules/**/entities/*.js"],
+    "cli": {
+      "migrationsDir": "./dist/shared/infra/typeorm/migrations"
+    }
   }
-}
+]
