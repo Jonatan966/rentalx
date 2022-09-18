@@ -4,12 +4,16 @@ import { inject, injectable } from 'tsyringe';
 import auth from '../../../../config/auth';
 import { IDateProvider } from '../../../../shared/container/providers/DateProvider/IDateProvider';
 import { AppError } from '../../../../shared/errors/AppError';
-import { UserTokens } from '../../infra/typeorm/entities/UserTokens';
 import { IUsersTokensRepository } from '../../repositories/IUsersTokensRepository';
 
 interface IPayload {
   email: string;
   sub: string;
+}
+
+interface ITokenResponse {
+  token: string;
+  refresh_token: string;
 }
 
 @injectable()
@@ -21,7 +25,7 @@ class RefreshTokenUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute(refreshToken: string): Promise<UserTokens> {
+  async execute(refreshToken: string): Promise<ITokenResponse> {
     const { email, sub: user_id } = verify(
       refreshToken,
       auth.secret_refresh_token
@@ -54,13 +58,21 @@ class RefreshTokenUseCase {
       expiresIn: expires_in_refresh_token,
     });
 
-    const savedRefreshToken = await this.usersTokensRepository.create({
+    await this.usersTokensRepository.create({
       expires_date: refreshTokenExpiresDate,
       refresh_token: newRefreshToken,
       user_id,
     });
 
-    return savedRefreshToken;
+    const newToken = sign({}, auth.secret_token, {
+      subject: user_id,
+      expiresIn: auth.expires_in_token,
+    });
+
+    return {
+      refresh_token: newRefreshToken,
+      token: newToken,
+    };
   }
 }
 
