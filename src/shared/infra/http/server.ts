@@ -10,11 +10,14 @@ import upload from '../../../config/upload';
 import swaggerFile from '../../../swagger.json';
 import createConnection from '../typeorm';
 import { parseErrors } from './middlewares/parseErrors';
+import rateLimiter from './middlewares/rateLimiter';
 import { router } from './routes';
 import '../../container';
 
 createConnection();
 const app = express();
+
+app.use(rateLimiter);
 
 app.use(express.json());
 app.use(
