@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
   workflow_dispatch:
 
@@ -12,18 +12,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup NodeJS
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      
+
       - name: Install dependencies
-        run: yarn 
-      
+        run: yarn
+
       - name: Build
         run: yarn build
-      
+
       - uses: actions/checkout@master
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
@@ -32,9 +32,9 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "., !node_modules"
-          target: "~/app/api-rentx"
-          
+          source: '., !node_modules'
+          target: '~/app/api-rentx'
+
       - name: Update API
         uses: appleboy/ssh-action@master
         with:
@@ -45,5 +45,7 @@ jobs:
           script: |
             cd ~/app/api-rentx
             yarn
+            yarn build
             NODE_ENV=prod ./node_modules/.bin/typeorm migration:run
+            docker compose up -d
             pm2 restart rentx_api
