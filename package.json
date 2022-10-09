@@ -4,7 +4,7 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "cross-env NODE_ENV=prod node ./dist/shared/infra/http/app.js",
     "dev": "ts-node-dev --inspect -r dotenv/config --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/app.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/index.ts",
     "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
@@ -68,7 +68,7 @@
     "supertest": "^6.2.4",
     "swagger-ui-express": "^4.4.0",
     "tsyringe": "^4.7.0",
-    "typeorm": "0.2.45",
+    "typeorm": "0.3.10",
     "uuid": "^8.3.2"
   }
 }
