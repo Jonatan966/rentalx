@@ -1,5 +1,6 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
+import dataSource from '../../../../../shared/infra/typeorm';
 import { ICreateCarDTO } from '../../../dtos/ICreateCarDTO';
 import { ICarsRepository } from '../../../repositories/ICarsRepository';
 import { Car } from '../entities/Car';
@@ -8,7 +9,7 @@ class CarsRepository implements ICarsRepository {
   private repository: Repository<Car>;
 
   constructor() {
-    this.repository = getRepository(Car);
+    this.repository = dataSource.getRepository(Car);
   }
 
   async create({
@@ -72,7 +73,7 @@ class CarsRepository implements ICarsRepository {
   }
 
   async findById(car_id: string): Promise<Car> {
-    const car = await this.repository.findOne(car_id);
+    const car = await this.repository.findOneBy({ id: car_id });
 
     return car;
   }

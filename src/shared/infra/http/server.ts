@@ -10,13 +10,14 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerConfig from '../../../config/swagger';
 import upload from '../../../config/upload';
 import swaggerFile from '../../../swagger.json';
-import createConnection from '../typeorm';
+import dataSource from '../typeorm';
 import { parseErrors } from './middlewares/parseErrors';
 import rateLimiter from './middlewares/rateLimiter';
 import { router } from './routes';
 import '../../container';
 
-createConnection();
+dataSource.initialize();
+
 const app = express();
 const isProduction = process.env.NODE_ENV === 'prod';
 
